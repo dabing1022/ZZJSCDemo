@@ -8,6 +8,7 @@
 
 #import "RootTableViewController.h"
 #import "ViewController.h"
+#import "ViewController2.h"
 #import "WKWebViewController.h"
 
 @interface RootTableViewController ()
@@ -32,16 +33,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"demoCellReuseId" forIndexPath:indexPath];
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"UIWebView";
-    } else {
-        cell.textLabel.text = @"WKWebView";
+    switch (indexPath.row)
+    {
+        case 0:
+            cell.textLabel.text = @"Way01. get JSContext from UIWebView";
+            break;
+        case 1:
+            cell.textLabel.text = @"Way02. get JSContext from UIWebView";
+            break;
+        case 2:
+            cell.textLabel.text = @"WKWebView";
+        default:
+            break;
     }
     
     return cell;
@@ -50,10 +59,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIViewController *vc = nil;
-    if (indexPath.row == 0) {
-        vc = [[ViewController alloc] init];
-    } else {
-        vc = [[WKWebViewController alloc] init];
+    switch (indexPath.row) {
+        case 0:
+            vc = [[ViewController alloc] init];
+            break;
+        case 1:
+            vc = [[ViewController2 alloc] init];
+            break;
+        case 2:
+            vc = [[WKWebViewController alloc] init];
+            break;
+        default:
+            break;
     }
     [self.navigationController pushViewController:vc animated:YES];
 }
