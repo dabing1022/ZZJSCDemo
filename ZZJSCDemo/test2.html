@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            var jsFunc = function() {
+                alert('Objective-C call js to show alert');
+                
+                // 不会调用，因此OCModel并不存在
+                OCModel.showAlertMsg('js title', 'js message');
+            }
+        
+        var jsParamFunc = function(argument) {
+            document.getElementById('jsParamFuncSpan').innerHTML = argument['name'];
+        }
+        </script>
+    </head>
+    <body>
+        <div style="margin-top: 100px">
+            <input type="button" value="Call ObjC system camera" onclick="OCModel.jsCallSystemCamera()">
+            <input type="button" value="Call ObjC system alert" onclick="OCModel.showAlertMsg('js title', 'js message')">
+        </div>
+
+        <div>
+            <input type="button" value="Call ObjC func with JSON " onclick="OCModel.callWithDict({'name': 'testname', 'age': 10, 'height': 170})">
+            <input type="button" value="Call ObjC func with JSON and ObjC call js func to pass args." onclick="OCModel.jsCallObjcAndObjcCallJsWithDict({'name': 'testname', 'age': 10, 'height': 170})">
+        </div>
+
+        <div>
+            <span id="jsParamFuncSpan" style="color: red; font-size: 50px;"></span>
+        </div>
+        <script text="javascript">jsFunc();</script>
+    </body>
+</html>

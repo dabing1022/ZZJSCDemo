@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0" />
+        <script type="text/javascript">
+            var buttonHandler1 = function() {
+                var message = {"cmd":"functionName1", "id":1}
+                try {
+                    window.webkit.messageHandlers.notExistNative.postMessage(message)
+                } catch(error) {
+<!--                    console.log("The native context does not exist yet.")-->
+                    alert("The native context does not exist yet.")
+                }
+            }
+            
+            var buttonHandler2 = function() {
+                var message = {"cmd":"functionName2", "id":2}
+                window.webkit.messageHandlers.native.postMessage(message)
+            }
+            var buttonHanlder3 = function() {
+                var message = {"cmd":"functionName3", "id":3}
+                window.webkit.messageHandlers.native.postMessage(message)
+            }
+        
+            function redHeader() {
+                document.querySelector('h1').style.color = "red";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>WKWebView Test</h1>
+        <form>
+            <button type='button' onclick='buttonHandler1()'>button1</button>
+            <button type='button' onclick='buttonHandler2()'>button2</button>
+            <button type='button' onclick='buttonHanlder3()'>button3</button>
+        </form
+    </body>
+</html>
+
