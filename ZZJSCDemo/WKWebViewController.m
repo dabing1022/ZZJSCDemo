@@ -20,11 +20,14 @@
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    if ([message.name isEqualToString:@"native"])
-    {
-        NSLog(@"ScriptHandlerObj receive script msg body: %@", message.body);
-        NSLog(@"ScriptHandlerObj receive script msg body: %@", message.frameInfo);
-    }
+    [self logMessage:message];
+    // We can do different things here by message's name
+}
+
+- (void)logMessage:(WKScriptMessage *)message {
+    NSLog(@"Script msg name: %@", message.name);
+    NSLog(@"Script msg body: %@", message.body);
+    NSLog(@"Script msg frameInfo: %@", message.frameInfo);
 }
 
 @end
@@ -54,6 +57,7 @@
     
     // @see test4.html window.webkit.messageHandlers.<name>.postMessage(message)
     [config.userContentController addScriptMessageHandler:handlerObj name:@"native"];
+    [config.userContentController addScriptMessageHandler:handlerObj name:@"bb_share"];
     
     // 改变 `<h1>WKWebView Test</h1>`颜色
     WKUserScript *script = [[WKUserScript alloc] initWithSource:@"redHeader()" injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
